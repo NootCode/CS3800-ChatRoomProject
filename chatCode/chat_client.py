@@ -1,10 +1,12 @@
 # chat_client.py
 
-import sys, socket, select
+import sys
+import socket
+import select
  
 def chat_client():
     if(len(sys.argv) < 3) :
-        print('Usage : python chat_client.py hostname port')
+        print ('Usage : python chat_client.py hostname port')
         sys.exit()
 
     host = sys.argv[1]
@@ -17,35 +19,42 @@ def chat_client():
     try :
         s.connect((host, port))
     except :
-        print('Unable to connect')
+        print ('Unable to connect')
         sys.exit()
      
-    print('Connected to remote host. You can start sending messages')
+    print ('Connected to remote host. You can start sending messages')
     sys.stdout.write('[Me] '); sys.stdout.flush()
      
     while 1:
+        print(s)
         socket_list = [socket.socket(), s]
+        #print(socket_list)
         # Get the list sockets which are readable
-        read_sockets, write_sockets, error_sockets = select.select(socket_list , [], [])
-         
-        for sock in read_sockets:            
+        #ready_to_read,ready_to_write,in_error = select.select(socket_list , [], [], 10)
+        #print(ready_to_read)
+
+        ready_to_read = socket_list
+        for sock in ready_to_read:             
             if sock == s:
                 # incoming message from remote server, s
                 data = sock.recv(4096)
-                print(data)
                 if not data :
-                    print('\nDisconnected from chat server')
+                    print ('\nDisconnected from chat server')
                     sys.exit()
                 else :
                     #print data
+                    print("mom")
                     sys.stdout.write(data)
                     sys.stdout.write('[Me] '); sys.stdout.flush()     
-            
+        
             else :
                 # user entered a message
-                msg = input("Enter: ")
-                s.send(msg)
+                print("dad")
+                msg = sys.stdin.readline()
+                s.send(msg.encode("utf-8"))
                 sys.stdout.write('[Me] '); sys.stdout.flush() 
+        print("breaking")
+        #break
 
 if __name__ == "__main__":
 
