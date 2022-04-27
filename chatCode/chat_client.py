@@ -23,7 +23,8 @@ def chat_client():
         print ('Unable to connect')
         sys.exit()
 
-    t = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    t = socket.socket()
+    #t.connect((host,port))
     print ('Connected to remote host. You can start sending messages')
     sys.stdout.write('[Me] '); sys.stdout.flush()
      
@@ -32,9 +33,9 @@ def chat_client():
         socket_list = [t, s]
         #print(socket_list)
         # Get the list sockets which are readable
-        # ready_to_read,ready_to_write,in_error = select.select(socket_list, [], []) 
+        #ready_to_read,ready_to_write,in_error = select.select(socket_list, [], []) 
         # ready_to_read.append(s)
-        # print(ready_to_read)
+        #print(ready_to_read)
         ready_to_read = socket_list
         for sock in ready_to_read:             
             if sock == s:
@@ -52,7 +53,8 @@ def chat_client():
                 # user entered a message
                 msg = sys.stdin.readline()
                 s.send(msg.encode("utf-8"))
-                sys.stdout.write('[Me] '); sys.stdout.flush() 
+                sys.stdout.write('[Me] '); sys.stdout.flush()
+            #sock.close()
         #break
     s.close()
 

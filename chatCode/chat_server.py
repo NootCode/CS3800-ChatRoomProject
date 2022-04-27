@@ -1,5 +1,6 @@
 # chat_server.py
  
+from asyncore import read
 import sys
 import socket
 import select
@@ -26,15 +27,16 @@ def chat_server():
 
         # get the list sockets which are ready to be read through select
         # 4th arg, time_out  = 0 : poll and never block
-        ready_to_read,ready_to_write,in_error = select.select(SOCKET_LIST,[],[], 0)
-      
+        ready_to_read,ready_to_write,in_error = select.select(SOCKET_LIST,[],[],0)
+        if(ready_to_read):
+            print(ready_to_read)
         for sock in ready_to_read:
             # a new connection request recieved
             if sock == server_socket: 
                 sockfd, addr = server_socket.accept()
                 SOCKET_LIST.append(sockfd)
                 print ("Client (%s, %s) connected" % addr)
-                #print(SOCKET_LIST)
+                print(SOCKET_LIST)
 
                 broadcast(server_socket, sockfd, "[%s:%s] entered our chatting room\n" % addr)
              
@@ -58,30 +60,46 @@ def chat_server():
 
                 # exception 
                 except:
-                    print("hey")
-                    # broadcast(server_socket, sock, "Client (%s, %s) is offline\n" % addr)
+                    print("howdy")
+                    broadcast(server_socket, sock, "Client (%s, %s) is offline\n" % addr)
                     continue
 
     server_socket.close()
     
 # broadcast chat messages to all connected clients
 def broadcast (server_socket, sock, message):
+    #print(SOCKET_LIST)
     for socket in SOCKET_LIST:
-        # #send the message only to peer
-        # if socket != server_socket and socket != sock :
-        #     try :
-        #         socket.send(message)
-        #         print("sent")
-        #     except :
-        #         # broken socket connection
-        #         socket.close()
-        #         # broken socket, remove it
-        #         if socket in SOCKET_LIST:
-        #             SOCKET_LIST.remove(socket)
+        #send the message only to peer
+        if socket == sock:
+            try :
+                print("yo")
+                socket.send(bytes("", 'utf-8'))
+            except :
+                # broken socket connection
+                socket.close()
+                # broken socket, remove it
+                if socket in SOCKET_LIST:
+                    print("trying to remove")
+                    SOCKET_LIST.remove(socket)
+                    print("AFTER REMOVAL")
+                    print(SOCKET_LIST)
+        elif socket != server_socket: 
+            try :
+                print("hey")
+                socket.send(bytes(message, 'utf-8'))
+            except :
+                # broken socket connection
+                socket.close()
+                # broken socket, remove it
+                if socket in SOCKET_LIST:
+                    SOCKET_LIST.remove(socket)
+                    print(SOCKET_LIST)
+
         # if socket == sock:
-        #     socket.send('yo'.encode('utf-8'))
-        if socket != server_socket and sock != socket: 
-            socket.send(bytes(message, 'utf-8'))
+        #     socket.send(''.encode('utf-8'))
+        # elif socket != server_socket: 
+        #     socket.send(bytes(message, 'utf-8'))
  
 if __name__ == "__main__":
 
