@@ -3,6 +3,7 @@
 import sys
 import socket
 import select
+import msvcrt
  
 def chat_client():
     if(len(sys.argv) < 3) :
@@ -29,14 +30,9 @@ def chat_client():
     sys.stdout.write('[Me] '); sys.stdout.flush()
      
     while 1:
-        #print(s)
-        socket_list = [t, s]
-        #print(socket_list)
-        # Get the list sockets which are readable
-        #ready_to_read,ready_to_write,in_error = select.select(socket_list, [], []) 
-        # ready_to_read.append(s)
-        #print(ready_to_read)
-        ready_to_read = socket_list
+        ready_to_read = select.select([s], [], [], 1)[0]
+        if msvcrt.kbhit(): 
+            ready_to_read.append(sys.stdin)
         for sock in ready_to_read:             
             if sock == s:
                 # incoming message from remote server, s
