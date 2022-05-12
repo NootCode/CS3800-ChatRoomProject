@@ -7,7 +7,7 @@ from PyQt5 import uic
 from PyQt5 import QtCore
 import threading
 
-client_ui = uic.loadUiType("testers/client.ui")[0]  
+client_ui = uic.loadUiType("client.ui")[0]  
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ready_to_read = []
 class clientGui(QWidget, client_ui):
