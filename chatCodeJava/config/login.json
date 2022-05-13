@@ -1,0 +1,5 @@
+{
+    "url": "jdbc:mysql://atm-subsystem-database.cxjsrixihlv1.us-west-1.rds.amazonaws.com/atm",
+    "user": "root",
+    "password": "CS3560G4"
+}
