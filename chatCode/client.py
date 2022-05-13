@@ -29,7 +29,7 @@ class clientGui(QWidget, client_ui):
 
 def clientStart():
         host = 'localhost' #sys.argv[1]
-        port = 9009 #int(sys.argv[2])
+        port = 1234 #int(sys.argv[2])
 
         s.settimeout(5)
         
@@ -41,6 +41,7 @@ def clientStart():
             sys.exit()
 
         widget.sendAndRec.append('Connected to remote host. You can start sending messages')
+        #widget.sendAndRec.append('Enter your username: ')
 
         while 1:
             ready_to_read = select.select([s], [], [], 1)[0]
