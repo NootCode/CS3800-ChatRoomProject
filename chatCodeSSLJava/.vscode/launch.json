@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Server",
+            "request": "launch",
+            "mainClass": "chatgui.Socket.Server",
+            "projectName": "chatCodeSSLJava_58e5f3ed"
+        },
+        {
+            "type": "java",
+            "name": "Launch ChatGui",
+            "request": "launch",
+            "mainClass": "chatgui.ChatGui",
+            "vmArgs": "--module-path lib/javafx-sdk-18/linux/lib --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
