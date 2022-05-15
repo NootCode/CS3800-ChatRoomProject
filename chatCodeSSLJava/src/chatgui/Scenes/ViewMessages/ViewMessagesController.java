@@ -41,7 +41,7 @@ public class ViewMessagesController implements Initializable {
     }
 
     private void loadMessage() {
-        String query = String.format("select message from messages where sender = \"%s\" limit 50", SceneData.accountName);
+        String query = String.format("select message from messages where sender = \"%s\" order by message_id DESC limit 50", SceneData.accountName);
         List<String> messages = chatAppSQL.connectAndExecuteQuery(query);
         for(String message : messages) {
             HBox hBox = new HBox();

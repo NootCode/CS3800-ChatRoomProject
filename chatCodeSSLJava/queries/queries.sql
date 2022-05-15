@@ -34,7 +34,7 @@ insert into account (username, password) VALUES ("debug_user2", "123");
 
 select * from account;
 
-select message from messages where sender = "test" limit 3;
+select * from messages where sender = "test" order by message_id DESC limit 50;
 
 select * from messages where receiver = "test123";
 
