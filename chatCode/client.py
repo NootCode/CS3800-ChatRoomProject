@@ -41,7 +41,7 @@ def clientStart():
             sys.exit()
 
         widget.sendAndRec.append('Connected to remote host. You can start sending messages')
-        #widget.sendAndRec.append('Enter your username: ')
+        widget.sendAndRec.append('Enter your username: ')
 
         while 1:
             ready_to_read = select.select([s], [], [], 1)[0]
