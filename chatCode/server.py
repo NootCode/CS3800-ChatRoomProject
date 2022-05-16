@@ -4,12 +4,11 @@ from asyncore import read
 import sys
 import socket
 import select
-import serverGUI
 
 HOST = '' 
 SOCKET_LIST = []
 RECV_BUFFER = 4096 
-PORT = 9009
+PORT = 1234
 
 def chat_server():
 
@@ -34,7 +33,6 @@ def chat_server():
             if sock == server_socket: 
                 sockfd, addr = server_socket.accept()
                 SOCKET_LIST.append(sockfd)
-                serverGUI.getTheString("Client (%s, %s) connected" % addr)
                 print ("Client (%s, %s) connected" % addr)
 
                 broadcast(server_socket, sockfd, "[%s:%s] entered our chatting room\n" % addr)

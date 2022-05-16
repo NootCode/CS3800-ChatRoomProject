@@ -1,6 +1,11 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
+<<<<<<< HEAD
+=======
+        "chatCodeJava/lib/json-simple-1.1.1.jar",
+        "chatCodeJava/lib/mysql-connector-java-8.0.29.jar",
+>>>>>>> pythonAndJava
         "chatCodeJava/lib/javafx-sdk-18/lib/javafx.base.jar",
         "chatCodeJava/lib/javafx-sdk-18/lib/javafx.controls.jar",
         "chatCodeJava/lib/javafx-sdk-18/lib/javafx.fxml.jar",
@@ -8,6 +13,7 @@
         "chatCodeJava/lib/javafx-sdk-18/lib/javafx.media.jar",
         "chatCodeJava/lib/javafx-sdk-18/lib/javafx.swing.jar",
         "chatCodeJava/lib/javafx-sdk-18/lib/javafx.web.jar",
+<<<<<<< HEAD
         "chatCodeJava/lib/javafx-sdk-18/lib/javafx-swt.jar",
         "chatCodeJava/lib/json-simple-1.1.1.jar",
         "chatCodeJava/lib/mysql-connector-java-8.0.29.jar",
@@ -21,5 +27,8 @@
         "chatCodeNonSSLJava/lib/javafx-sdk-18/lib/javafx-swt.jar",
         "chatCodeNonSSLJava/lib/json-simple-1.1.1.jar",
         "chatCodeNonSSLJava/lib/mysql-connector-java-8.0.29.jar"
+=======
+        "chatCodeJava/lib/javafx-sdk-18/lib/javafx-swt.jar"
+>>>>>>> pythonAndJava
     ]
 }
